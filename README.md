@@ -197,42 +197,58 @@ This architecture, centered on Redux Toolkit, RTK Query, and modular React Nativ
 
 ---
 
-## Technologies Used
+## 🛠️ Technologies Used
+
+### Core
 
 - **React Native**  
-  The core framework for building cross-platform mobile applications.
+  Framework for building cross-platform mobile apps with native performance.
 
 - **TypeScript**  
-  Provides static typing for safer and more maintainable code.
+  Adds static typing to JavaScript for safer and more maintainable code.
+
+### State Management
 
 - **Redux Toolkit**  
-  Manages global application state using slices, reducers, and async thunks for features like settings and conversations.
+  Simplifies global state management using slices, reducers, and async thunks (e.g., for settings and conversations).
 
 - **RTK Query**  
-  Handles API data fetching, caching, and auto-generates hooks for seamless integration with React components.
+  Handles API data fetching, caching, and auto-generates React hooks for seamless integration with components.
+
+### Navigation & UI
 
 - **React Navigation**  
-  Enables navigation between screens and manages navigation state.
+  Manages navigation and screen transitions throughout the app.
 
 - **react-native-safe-area-context**  
   Ensures UI elements respect device safe areas (notches, status bars).
 
-- **.env Environment Variables**  
-  Stores sensitive configuration such as API endpoints (e.g., `AI_API_URL` for backend AI services).
+- **Custom Components**  
+  Modular UI elements like `AppBar`, avatar selectors, and settings screens for a consistent user experience.
+
+### Backend & APIs
 
 - **Google Cloud Functions**  
   Hosts serverless backend endpoints for AI-powered features (e.g., OpenAI integration).
+
+- **Environment Variables (.env)**  
+  Stores sensitive configuration such as API endpoints (e.g., `AI_API_URL`).
+
+### Utilities & Tooling
 
 - **Jest**  
   Provides unit testing for components and business logic.
 
 - **ESLint & Prettier**  
-  Enforce code style and formatting consistency.
+  Enforce code style and formatting consistency across the codebase.
 
 - **react-native-tts**  
   Enables text-to-speech functionality for language learning features.
 
+This stack enables a robust, scalable, and maintainable mobile application focused on interactive language learning.
+
 ---
+
 ## Troubleshooting
 
 ### Fix for `react-native-tts` module errors on Android
