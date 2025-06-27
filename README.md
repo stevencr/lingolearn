@@ -197,6 +197,42 @@ This architecture, centered on Redux Toolkit, RTK Query, and modular React Nativ
 
 ---
 
+## Technologies Used
+
+- **React Native**  
+  The core framework for building cross-platform mobile applications.
+
+- **TypeScript**  
+  Provides static typing for safer and more maintainable code.
+
+- **Redux Toolkit**  
+  Manages global application state using slices, reducers, and async thunks for features like settings and conversations.
+
+- **RTK Query**  
+  Handles API data fetching, caching, and auto-generates hooks for seamless integration with React components.
+
+- **React Navigation**  
+  Enables navigation between screens and manages navigation state.
+
+- **react-native-safe-area-context**  
+  Ensures UI elements respect device safe areas (notches, status bars).
+
+- **.env Environment Variables**  
+  Stores sensitive configuration such as API endpoints (e.g., `AI_API_URL` for backend AI services).
+
+- **Google Cloud Functions**  
+  Hosts serverless backend endpoints for AI-powered features (e.g., OpenAI integration).
+
+- **Jest**  
+  Provides unit testing for components and business logic.
+
+- **ESLint & Prettier**  
+  Enforce code style and formatting consistency.
+
+- **react-native-tts**  
+  Enables text-to-speech functionality for language learning features.
+
+---
 ## Troubleshooting
 
 ### Fix for `react-native-tts` module errors on Android
