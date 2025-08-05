@@ -1,6 +1,6 @@
 # Lingo Learn
 
-**Lingo Learn** is a language learning app developed by **Steven Cranfield** using React Native, TypeScript, and Redux Toolkit. The app leverages a Google Cloud Function (GCP) to interact with OpenAI’s ChatGPT 3.5-turbo API to provide an interactive, immersive language learning experience.
+**Lingo Learn** is a sophisticated language learning app developed by **Steven Cranfield** using React Native, TypeScript, and Redux Toolkit. The app features **local AI integration with Ollama and Mistral 7B**, providing privacy-first, cost-effective language learning without relying on external APIs. This demonstrates advanced local LLM deployment and integration capabilities.
 
 ---
 
@@ -15,74 +15,82 @@ This project is **no longer maintained**. Please consider this before using it.
 ## Screenshots
 
 ### Chat Interface
+
 <img src="https://github.com/stevencr/lingolearn/blob/main/assets/screenshots/Screenshot1.jpg" width="300" />
 
-### Settings 
+### Settings
+
 <img src="https://github.com/stevencr/lingolearn/blob/main/assets/screenshots/Screenshot2.jpg" width="300" />
 
 ### User Settings
+
 <img src="https://github.com/stevencr/lingolearn/blob/main/assets/screenshots/Screenshot3.jpg" width="300" />
 
 ### Feedback and corrections
+
 <img src="https://github.com/stevencr/lingolearn/blob/main/assets/screenshots/Screenshot4.jpg" width="300" />
 
 ---
 
 ## Features
 
+- **Local AI Integration**: Powered by Ollama with Mistral 7B for privacy-first, offline-capable language learning
+- **Flexible AI Architecture**: Supports both local and cloud-based AI models through configurable endpoints
 - Interactive language learning sessions with real-time chat
-- Converse in your target language
+- Converse in your target language with intelligent AI responses
 - Read or listen to short stories followed by comprehension questions
-- Clean and user-friendly interface
-- Robust state management with Redux Toolkit and redux-thunk
-- API integration with ChatGPT 3.5-turbo via Google Cloud Functions
+- Clean and user-friendly interface with advanced state management
+- Robust architecture with Redux Toolkit, RTK Query, and async thunks
+- Custom API response parsing for multiple AI service formats
 - Animations implemented using `react-native-reanimated`
 - TypeScript ensures code safety and maintainability
-- ESLint enforces consistent code style
-- React Toolkit Query for streamlined API data fetching
 - Speech-to-text in multiple languages using `react-native-tts`
 
 ---
 
 ## Supported Languages
 
-| Language          |                     |
-|-------------------|-------------------------|
-| Mandarin Chinese  | ![CN](https://flagcdn.com/w40/cn.png)  |
-| Spanish           | ![ES](https://flagcdn.com/w40/es.png)  |
-| English           | ![GB](https://flagcdn.com/w40/gb.png)  |
-| Hindi             | ![IN](https://flagcdn.com/w40/in.png)  |
-| Arabic            | ![SA](https://flagcdn.com/w40/sa.png)  |
-| Bengali           | ![BD](https://flagcdn.com/w40/bd.png)  |
-| Portuguese        | ![PT](https://flagcdn.com/w40/pt.png)  |
-| Russian           | ![RU](https://flagcdn.com/w40/ru.png)  |
-| French            | ![FR](https://flagcdn.com/w40/fr.png)  |
-| German            | ![DE](https://flagcdn.com/w40/de.png)  |
-| Urdu              | ![PK](https://flagcdn.com/w40/pk.png)  |
-| Japanese          | ![JP](https://flagcdn.com/w40/jp.png)  |
-| Tamil             | ![IN](https://flagcdn.com/w40/in.png)  |
+| Language         |                                       |
+| ---------------- | ------------------------------------- |
+| Mandarin Chinese | ![CN](https://flagcdn.com/w40/cn.png) |
+| Spanish          | ![ES](https://flagcdn.com/w40/es.png) |
+| English          | ![GB](https://flagcdn.com/w40/gb.png) |
+| Hindi            | ![IN](https://flagcdn.com/w40/in.png) |
+| Arabic           | ![SA](https://flagcdn.com/w40/sa.png) |
+| Bengali          | ![BD](https://flagcdn.com/w40/bd.png) |
+| Portuguese       | ![PT](https://flagcdn.com/w40/pt.png) |
+| Russian          | ![RU](https://flagcdn.com/w40/ru.png) |
+| French           | ![FR](https://flagcdn.com/w40/fr.png) |
+| German           | ![DE](https://flagcdn.com/w40/de.png) |
+| Urdu             | ![PK](https://flagcdn.com/w40/pk.png) |
+| Japanese         | ![JP](https://flagcdn.com/w40/jp.png) |
+| Tamil            | ![IN](https://flagcdn.com/w40/in.png) |
 
 ## Roadmap / Todo List
 
 ### Performance Improvements
+
 - Optimize message list rendering with virtualized lists
 - Enhance rendering efficiency using Redux Toolkit entity adapters
 
 ### Feature Enhancements
+
 - Transition chat API to use GPT-4 Assistant API
 - **Translation-only mode:** Automatically translate user input when typed in the mother tongue
 - **Text-to-speech:** Add animations, and controls for pause/stop functionality
 - **Speech-to-text:** Implement voice input support
-- **User Ability Rating:** 
+- **User Ability Rating:**
   - Display message-level ratings on a 5-star scale
   - Develop a system to assess and showcase overall language proficiency
 - **AI-powered Localization:** Download and store language localizations dynamically
 
 ### Testing & Documentation
+
 - Write unit tests with Jest
 - Improve and expand documentation with TSDoc comments and contribution guidelines
 
 ### UI/UX
+
 - Refine design and user interface
 - Enhance animations and transitions for smoother experience
 
@@ -99,33 +107,36 @@ This project is **no longer maintained**. Please consider this before using it.
 ### Installation
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/stevencr/lingolearn.git
-    ```
+
+   ```bash
+   git clone https://github.com/stevencr/lingolearn.git
+   ```
 
 2. Change into the project directory:
-    ```bash
-    cd lingolearn
-    ```
+
+   ```bash
+   cd lingolearn
+   ```
 
 3. Install dependencies:
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
 ### Running the App
 
 - For Android:
-    ```bash
-    npm run android
-    ```
+
+  ```bash
+  npm run android
+  ```
 
 - For iOS:
-    ```bash
-    npm run ios
-    ```
+  ```bash
+  npm run ios
+  ```
 
 ---
 
@@ -137,24 +148,28 @@ The `conversationsSlice.tsx` file, as an example, manages all conversation-relat
 
 #### Key Features
 
-- **Message Handling**:  
+- **Message Handling**:
+
   - `addMessage` and `addUserMessage` reducers add bot and user messages to the conversation state.
   - `markAsPlayed` updates a message’s status when it has been played (e.g., audio listened).
   - `clearAllMessages` resets the conversation state.
 
-- **Async AI Integration**:  
+- **Async AI Integration**:
+
   - Uses `createAsyncThunk` to define `getAIMessageAsync` and `getAIAssessmentAsync` for asynchronous calls to the AI backend (or debug mocks).
   - Handles loading, success, and error states for both message generation and assessment.
   - Integrates with the UI to provide real-time feedback on AI operations.
 
-- **Error and Status Tracking**:  
+- **Error and Status Tracking**:
+
   - The slice tracks the status (`idle`, `loading`, `succeeded`, `failed`) and any errors for robust UI feedback and debugging.
 
 - **Example: Adding a User Message**
 
 ```tsx
-dispatch(addUserMessage({ id: uuid(), message: userInput }));
+dispatch(addUserMessage({id: uuid(), message: userInput}));
 ```
+
 - **Async Thunk Integration with `addCase`**
 
 - **Pattern**:  
@@ -163,6 +178,7 @@ dispatch(addUserMessage({ id: uuid(), message: userInput }));
   This allows the slice to update the conversation state (e.g., loading status, error messages, message content) in response to asynchronous API calls.
 
 - **Example:**
+
 ```ts
 builder
   .addCase(getAIMessageAsync.pending, state => {
@@ -182,8 +198,9 @@ builder
   Using RTK Query for conversation APIs will dynamically generate React hooks (like `useGetConversationQuery` or `useSendMessageMutation`). These hooks encapsulate the async logic and state management, providing a more declarative and component-friendly API.
 
 - **Example with RTK Query (not in this slice, but going forward the new way to do it):**
+
 ```ts
-const { data, isLoading, error } = useGetConversationQuery(conversationId);
+const {data, isLoading, error} = useGetConversationQuery(conversationId);
 ```
 
 #### Extensibility
@@ -228,11 +245,17 @@ This architecture, centered on Redux Toolkit, RTK Query, and modular React Nativ
 
 ### Backend & APIs
 
-- **Google Cloud Functions**  
-  Hosts serverless backend endpoints for AI-powered features (e.g., OpenAI integration).
+- **Local AI with Ollama Integration**  
+  Features local LLM deployment using Ollama with Mistral 7B, eliminating external API dependencies and ensuring privacy-first language learning. This showcases advanced local AI integration and reduces operational costs.
+
+- **Flexible AI Architecture**  
+  Supports both local Ollama models and cloud-based APIs through configurable endpoints, demonstrating versatility in AI integration approaches.
 
 - **Environment Variables (.env)**  
-  Stores sensitive configuration such as API endpoints (e.g., `AI_API_URL`).
+  Stores configuration for AI endpoints, supporting seamless switching between local and cloud AI services.
+
+- **Custom Response Parsing**  
+  Implements intelligent response parsing that handles different AI API formats (Ollama vs OpenAI), showcasing adaptability in API integration.
 
 ### Utilities & Tooling
 
@@ -267,4 +290,4 @@ public void addListener(String eventName) {
 public void removeListeners(Integer count) {
   // Required for React Native built-in Event Emitter Calls.
 }
-
+```
