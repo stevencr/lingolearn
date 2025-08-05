@@ -24,6 +24,7 @@ import {useScrollView} from '../../contexts/scrollViewProvider';
 function Home(): JSX.Element {
   const settings = useAppSelector(state => state.settings);
   const {scrollViewRef, scrollToEnd} = useScrollView();
+  const selectedModel = useAppSelector(state => state.settings.selectedModel);
   const {userName, botName, targetLang, sourceLang, debugMode} = settings;
   const [userMessage, setUserMessage] = useState<string | undefined>('');
   const [started, setStarted] = useState(false);
@@ -55,7 +56,15 @@ function Home(): JSX.Element {
           settings.severityLevel,
           conversations,
         );
-        dispatch(getAIAssessmentAsync({id, prompt, targetLang, debugMode}));
+        dispatch(
+          getAIAssessmentAsync({
+            id,
+            prompt,
+            targetLang,
+            debugMode,
+            selectedModel,
+          }),
+        );
         scrollToEnd();
       } catch (err) {
         handleSnackbarError('Yikes, an error occurred!');
@@ -101,7 +110,9 @@ function Home(): JSX.Element {
           conversations,
         );
         setStatus('loading');
-        await dispatch(getAIMessageAsync({id, prompt, targetLang, debugMode}));
+        await dispatch(
+          getAIMessageAsync({id, prompt, targetLang, debugMode, selectedModel}),
+        );
       } catch (err: any) {
         handleSnackbarError(err.message);
       } finally {
@@ -143,6 +154,7 @@ function Home(): JSX.Element {
     userName,
     debugMode,
     scrollToEnd,
+    selectedModel,
   ]);
 
   const renderSnackbar = () => (

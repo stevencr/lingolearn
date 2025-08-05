@@ -4,13 +4,18 @@ import axios from 'axios';
 import {AI_API_URL} from '@env';
 import {samplePhrases} from '../settings/languages';
 import {ApiMessageResponse, ApiAssessmentResponse} from '../../types/types';
-import {extractJsonFromResponse, getRandomElement} from '../../utils/common';
+import {
+  extractJsonFromResponse,
+  getRandomElement,
+  parseOllamaResponse,
+} from '../../utils/common';
 import {
   DEBUG_ASSESSMENT_MULTIPLIER,
   DEBUG_ERROR_PROBS,
   DEBUG_MESSAGE_DELAY,
   DEBUG_MISTAKES_PROBS,
 } from '../../constants/const';
+import {ResponseParserFactory} from '../../utils/responseParserFactory';
 const initialState: IConversationState = {
   status: 'idle',
   messages: [],
@@ -136,14 +141,26 @@ const getAIAssessmentDebug = async (
 const getAIAssessmentFromApi = async (
   id: string,
   prompt: string,
+  selectedModel: string, // Add this parameter
 ): Promise<ApiAssessmentResponse> => {
-  const response = await axios.post(
-    AI_API_URL,
-    {prompt},
-    {headers: {'Content-Type': 'application/json'}},
-  );
+  // Get the endpoint for the selected model
+  const endpoint = ResponseParserFactory.getEndpointForModel(selectedModel);
+
+  // Prepare request body based on model type
+  const requestBody = selectedModel.includes('gpt')
+    ? {prompt} // OpenAI format
+    : {model: selectedModel, prompt, stream: false}; // Ollama format
+
+  const response = await axios.post(endpoint, requestBody, {
+    headers: {'Content-Type': 'application/json'},
+  });
+
+  // Use the factory for assessment responses too
+  const parser = ResponseParserFactory.createParser(selectedModel);
+  const parsedData = parser.parse(response.data);
+
   return {
-    ...response.data,
+    ...parsedData,
     id,
   };
 };
@@ -167,21 +184,34 @@ const getAIMessageDebug = async (
 const getAIMessageFromApi = async (
   id: string,
   prompt: string,
+  selectedModel: string,
 ): Promise<ApiMessageResponse> => {
-  const response = await axios.post(
-    AI_API_URL,
-    {prompt},
-    {headers: {'Content-Type': 'application/json'}},
-  );
-  console.log(response.data);
-  const extractedJson = extractJsonFromResponse(response.data);
-  if (extractedJson) {
+  // Get the endpoint for the selected model
+  const endpoint = ResponseParserFactory.getEndpointForModel(selectedModel);
+
+  // Prepare request body based on model type
+  const requestBody = selectedModel.includes('gpt')
+    ? {prompt} // OpenAI format
+    : {model: selectedModel, prompt, stream: false}; // Ollama format
+
+  const response = await axios.post(endpoint, requestBody, {
+    headers: {'Content-Type': 'application/json'},
+  });
+
+  console.log(`${selectedModel} response:`, response.data);
+
+  // Use the factory to get the appropriate parser
+  const parser = ResponseParserFactory.createParser(selectedModel);
+  const parsedData = parser.parse(response.data);
+
+  if (parsedData) {
     return {
-      ...extractedJson,
+      ...parsedData,
       id,
     };
   }
-  console.log('No valid JSON found in the response.');
+
+  console.log('No valid data found in the response.');
   return {
     targetLang: 'An error occurred',
     sourceLang: '',
@@ -196,12 +226,13 @@ export const getAIMessageAsync = createAsyncThunk(
     prompt: string;
     targetLang: string;
     debugMode: boolean;
+    selectedModel: string;
   }): Promise<ApiMessageResponse> => {
-    const {id, prompt, targetLang, debugMode} = payload;
+    const {id, prompt, targetLang, debugMode, selectedModel} = payload;
 
     return debugMode
       ? getAIMessageDebug(id, targetLang)
-      : getAIMessageFromApi(id, prompt);
+      : getAIMessageFromApi(id, prompt, selectedModel);
   },
 );
 
@@ -212,11 +243,12 @@ export const getAIAssessmentAsync = createAsyncThunk(
     prompt: string;
     targetLang: string;
     debugMode: boolean;
+    selectedModel: string;
   }): Promise<ApiAssessmentResponse> => {
-    const {id, prompt, debugMode} = payload;
+    const {id, prompt, debugMode, selectedModel} = payload;
     return debugMode
       ? getAIAssessmentDebug(id)
-      : getAIAssessmentFromApi(id, prompt);
+      : getAIAssessmentFromApi(id, prompt, selectedModel);
   },
 );
 

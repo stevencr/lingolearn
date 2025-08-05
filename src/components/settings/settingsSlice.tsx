@@ -12,6 +12,7 @@ export type Settings = {
   userAvatar: string;
   botAvatar: string;
   autoPlay: boolean;
+  selectedModel: string; // Add this line
 };
 
 const availableUserAvatars = [
@@ -31,10 +32,11 @@ const initialState: Settings = {
   userName: 'Steven',
   botName: 'Jack',
   showTranslation: true,
-  debugMode: true,
+  debugMode: false,
   userAvatar: getRandomElement(availableUserAvatars),
   botAvatar: getRandomElement(availableBotAvatars),
   autoPlay: false,
+  selectedModel: 'mistral:7b-instruct',
 };
 
 const settingsSlice = createSlice({
